@@ -1,4 +1,8 @@
 # -*- coding: utf-8 -*-
+import requests
+import json
+
+KEY_FILENAME = "Key"
 
 def main():
     print("hello")
