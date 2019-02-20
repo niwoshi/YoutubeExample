@@ -151,6 +151,7 @@ if __name__ == '__main__':
 +++
 
 - URLを実際に生成してアクセスしてみる
+
 ```python
     search_url = YOUTUBEAPI_ENDPOINT + "search?part=snippet&q={}&order=date&maxResults={}&key={}"
 
@@ -243,7 +244,68 @@ from pprint import pprint # pprintライブラリ、jsonの成型表示とか便
 
 - `リクエストを投げる` ＋ `情報を受け取る`、が完了した
 
++++
+
+- 一応リクエスト投げたときに200でOKが出ているかチェックしておく
+
+```python
+    if response.status_code == requests.codes.ok:
+        res_json = response.json()
+        pprint(res_json)
+```
+
 ---
 
 ## パースする
 
+- 実は`res_json = response.json()`の段階でパースは終わってる
+- レスポンスが辞書型で格納されている
+
++++
+
+```json
+{'etag': 'hogehoge',
+ 'items': [{'etag': 'hogehoge',
+            'id': {'kind': 'youtube#video', 'videoId': '8qdxiRm9r7g'},
+            'kind': 'youtube#searchResult',
+            'snippet':
+...
+```
+
++++
+
+- `etag`と`items`というキーがある
+- 今回必要なのは`items`
+  - `items`が内部にあるかチェックする
+  
++++
+
+```python
+        if "items" in res_json:
+            pprint(res_json["items"]) # res_json["items"]で検索結果のリストが得られる
+```
+
++++
+
+- 各タイトルだけ抽出してみる
+
+```python
+        if "items" in res_json:
+            for video_info in res_json["items"]:
+                if ("snippet" in video_info) and ("title" in video_info["snippet"]):
+                    print(video_info["snippet"]["title"])
+```
+
++++
+
+- タイトルの情報が得られた
+- 他の情報が欲しい場合は`title`を色々変えればOK
+- あとはファイルに出力するなりDBに登録するなりお手の物
+
+---
+
+<div style="text-align: center;">
+<span style="font-size: 200%;">終</span><br/>
+<u>制作・著作</u><br/>
+ysmn
+</div>
