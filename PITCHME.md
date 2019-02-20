@@ -75,7 +75,7 @@
 - APIを呼び出す場所 -> その他UI
 - アクセスするデータの種類 -> 一般公開データ
 
-+++![](gpimage/010.PNG)
+<img src="gpimage/010.PNG" height="200" />
 
 +++
 
