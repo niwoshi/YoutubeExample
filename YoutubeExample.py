@@ -4,8 +4,12 @@ import json
 
 KEY_FILENAME = "Key"
 
+
 def main():
-    print("hello")
+    with open(file=KEY_FILENAME, mode='r', encoding='utf-8') as f:
+        API_KEY = f.readline()
+    print(API_KEY)
+    print("↑APIキー")
 
 
 if __name__ == '__main__':

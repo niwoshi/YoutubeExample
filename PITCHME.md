@@ -77,7 +77,7 @@
 
 +++
 
-![](gpimage/010.PNG)
+<img src="gpimage/010.PNG" height="400" />
 
 +++
 
@@ -88,3 +88,32 @@
 +++
 
 - 事前準備は以上で終了。
+
+---
+
+## 基本的な流れ
+
+1. APIキーを呼び出す
+1. APIキーを使ってHTTPリクエストを投げる
+1. 情報を受け取る
+1. パースする
+
+---
+
+## APIキーを呼び出す
+
+```python
+KEY_FILENAME = "Key"
+
+
+def main():
+    with open(file=KEY_FILENAME, mode='r', encoding='utf-8') as f:
+        API_KEY = f.readline()
+    print(API_KEY)
+    print("↑APIキー")
+
+
+if __name__ == '__main__':
+    main()
+```
+
